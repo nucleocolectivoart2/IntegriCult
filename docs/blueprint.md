@@ -1,0 +1,20 @@
+# **App Name**: IntegriCult
+
+## Core Features:
+
+- Narrative Section Display: Render 6 distinct content sections, each unfolding the 'spiral narrative' from the internal 'Ser' to 'Gobierno de Sí Mismo', integrating text, media placeholders, and simple diagrams.
+- Spiral Navigation & Smooth Scroll: Implement a fixed sidebar navigation (desktop) or adaptable menu (mobile) that visually represents the 'espiral' journey, with smooth scrolling to each corresponding section and highlighting the active view.
+- Responsive Design Adaptability: Ensure the entire website layout, navigation, and content presentation fluidly adapts to various screen sizes, offering an optimal experience on both mobile devices and desktops.
+- Scroll-Triggered Content Reveal: Integrate subtle fade-up and opacity-based animations, revealing section content elegantly as the user scrolls, enhancing the immersive narrative flow.
+- Interactive Contact Form: Provide a simple contact form (name, email, message) at the end of the narrative, designed to collect user inquiries with a backend integration target for Firebase Firestore.
+- AI-Powered Narrative Draft Tool: Develop an internal tool to assist John Cardona in drafting or refining reflective narrative texts for the website and related content, leveraging AI to suggest phrasing and expand on Jungian and ethical themes.
+
+## Style Guidelines:
+
+- Background color: A serene, very light greige (#EDEDEB). This hue is derived from our primary color, heavily desaturated to provide a neutral, refined canvas that suggests a fine paper texture and allows content to truly breathe, fitting a cultured aesthetic.
+- Primary color: A rich, profound brown (#5D4037). This color is selected for its connection to earthiness, stability, and intellectual depth, aligning with themes of grounding and serious reflection without being austere. It provides strong contrast for headings and key textual elements on the light background.
+- Accent color: A nuanced terracotta (#CA464D). Analogous to our primary hue, this color introduces a touch of warmth and vibrant organic energy. Its balanced saturation ensures it complements the primary brown beautifully, serving as a subtle highlight for interactive elements or visual cues, while resonating with an earthy, reflective mood.
+- Headlines will feature 'Playfair', a modern serif font with high contrast and elegant lines, chosen to convey a sense of refinement, history, and artistic flair, fitting for a narrative-driven experience. Body text will utilize 'Inter', a clean, contemporary sans-serif, providing excellent readability and a modern, objective voice that balances the artistic nature of the headlines.
+- Integrate a suite of clean, vector-based icons that symbolically represent the project's core themes—balance, governance, knowledge, and inner reflection. Icons should maintain a sophisticated, minimal aesthetic to complement the design, featuring imagery such as a scale, shield, book, or subtle spiral motifs, possibly using Font Awesome via CDN for accessibility and scalability.
+- The experience is anchored on a single-page 'spiral narrative' flow, encouraging continuous exploration. Sections are distinct but flow seamlessly into one another, vertically stacked. Navigation is a fixed, subtly interactive sidebar on larger screens, evolving into an accessible, collapsible element for mobile, maintaining intuitive access across devices.
+- Employ understated animations throughout the user journey, including a fluid smooth scroll mechanism for navigating between sections. Content elements will progressively reveal themselves with subtle fade-up transitions as they enter the viewport ('scroll reveal'). Interactive elements like the navigation menu items will feature gentle hover effects, creating an engaging and polished user experience without distraction.

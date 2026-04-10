@@ -1,0 +1,52 @@
+{
+  "placeholderImages": [
+    {
+      "id": "intro-bg",
+      "description": "Nebulosa abstracta profunda con luces etéreas, simbolizando el origen de la conciencia IntegriCult",
+      "imageUrl": "https://picsum.photos/seed/integricult-abstract-nebula/1920/1080",
+      "imageHint": "abstract nebula"
+    },
+    {
+      "id": "corporativo-bg",
+      "description": "Concepto de naturaleza minimalista y estratégica, representando el crecimiento sostenible",
+      "imageUrl": "https://picsum.photos/seed/integricult-nature-strategy/1000/1000",
+      "imageHint": "minimalist nature"
+    },
+    {
+      "id": "ser-bg",
+      "description": "Espacio de reflexión y paz interna, simbolismo de individuación",
+      "imageUrl": "https://picsum.photos/seed/integricult-self-inner/1920/1080",
+      "imageHint": "contemplation nature"
+    },
+    {
+      "id": "puente-video",
+      "description": "Gato majestuoso como guardián del umbral, simbolizando el equilibrio y la conexión entre el mundo interno y la manifestación externa",
+      "imageUrl": "https://picsum.photos/seed/987/800/1000",
+      "imageHint": "majestic cat"
+    },
+    {
+      "id": "conexion-bg",
+      "description": "Raíces interconectadas en el suelo de un bosque, simbolizando la sostenibilidad y la ética relacional.",
+      "imageUrl": "https://picsum.photos/seed/integricult-roots-connection/1200/800",
+      "imageHint": "interconnected roots"
+    },
+    {
+      "id": "deber-bg",
+      "description": "Gato con mirada de rigor y orden, simbolizando el guardián de la ética y el cumplimiento normativo en el capítulo del Deber Ser.",
+      "imageUrl": "https://picsum.photos/seed/integricult-guardian-cat/800/1200",
+      "imageHint": "guardian cat"
+    },
+    {
+      "id": "gobernanza-bg",
+      "description": "Orden corporativo y estructura senior",
+      "imageUrl": "https://picsum.photos/seed/integricult-governance-order/1200/800",
+      "imageHint": "senior management"
+    },
+    {
+      "id": "gobierno-bg",
+      "description": "Bosque sombrío y reflexivo que evoca la introspección y el gobierno del sí mismo.",
+      "imageUrl": "https://picsum.photos/seed/integricult-dark-forest/1920/1080",
+      "imageHint": "dark forest"
+    }
+  ]
+}
