@@ -1,0 +1,138 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Fondo greige luminoso con textura de papel */
+    --background: 40 20% 98.5%; 
+    /* Marrón profundo IntegriCult */
+    --foreground: 11 28% 15%; 
+    --card: 0 0% 100%;
+    --card-foreground: 11 28% 15%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 11 28% 15%;
+    --primary: 11 28% 15%;
+    --primary-foreground: 40 43% 98%;
+    --secondary: 20 70% 50%; /* NARANJA TERRACOTA */
+    --secondary-foreground: 40 43% 98%;
+    --muted: 40 10% 95%;
+    --muted-foreground: 11 15% 45%;
+    /* Dorado Editorial IntegriCult - #B08D57 */
+    --accent: 37 36% 52%; 
+    --accent-foreground: 40 43% 98%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 40 43% 98%;
+    --border: 11 15% 85%;
+    --input: 11 15% 85%;
+    --ring: 20 70% 50%;
+    /* BORDES TOTALMENTE RECTOS PARA LOOK ARQUITECTÓNICO */
+    --radius: 0rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground selection:bg-secondary/20 overflow-x-hidden antialiased;
+    background-image: 
+      radial-gradient(at 0% 0%, hsla(38, 20%, 95%, 0.1) 0, transparent 50%),
+      url("https://www.transparenttextures.com/patterns/paper-fibers.png");
+    background-attachment: fixed;
+  }
+}
+
+/* TIPOGRAFÍA EDITORIAL REFINADA - ESCALA AJUSTADA PARA EVITAR MONUMENTALIDAD */
+.text-fluid-hero {
+  font-size: clamp(4rem, 10vw, 8rem);
+  line-height: 0.85;
+  letter-spacing: -0.05em;
+}
+
+.text-fluid-chapter {
+  font-size: clamp(3.5rem, 8vw, 6.5rem);
+  line-height: 0.9;
+  letter-spacing: -0.04em;
+}
+
+.font-headline {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 600;
+}
+
+.font-editorial {
+  font-family: 'Playfair Display', serif;
+}
+
+.letter-spacing-pro {
+  letter-spacing: 0.2em;
+}
+
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-on-scroll.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.parallax-container {
+  @apply relative overflow-hidden;
+}
+
+.parallax-bg {
+  @apply absolute inset-0 transition-transform duration-150 ease-out h-[130%] top-[-15%] w-full;
+  will-change: transform;
+}
+
+/* EFECTO KEN BURNS PRO */
+@keyframes ken-burns-pro {
+  0% { transform: scale(1.05) translate(0, 0); }
+  50% { transform: scale(1.12) translate(-0.5%, 0.25%); }
+  100% { transform: scale(1.05) translate(0, 0); }
+}
+
+.animate-ken-burns {
+  animation: ken-burns-pro 45s ease-in-out infinite;
+}
+
+/* BORDES RECTOS FORZADOS */
+button, input, textarea, div, section, article {
+  border-radius: 0 !important;
+}
+
+.glass-panel {
+  @apply bg-white/95 backdrop-blur-xl border border-white/50 shadow-2xl;
+}
+
+.paper-card {
+  @apply bg-white shadow-xl border border-black/5 relative overflow-hidden;
+  box-shadow: 15px 15px 40px rgba(0,0,0,0.02), -15px -15px 40px rgba(255,255,255,0.7);
+}
+
+.brochure-shadow {
+  box-shadow: 0 25px 50px -12px rgba(50, 50, 93, 0.08), 0 15px 30px -18px rgba(0, 0, 0, 0.1);
+}
+
+/* SCROLLBAR EDITORIAL */
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(var(--background));
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--primary) / 0.08);
+  border-radius: 0;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--secondary));
+}
