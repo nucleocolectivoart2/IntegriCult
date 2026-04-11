@@ -11,7 +11,6 @@ import { DraftTool } from "@/components/draft-tool";
 import { ParallaxSection } from "@/components/parallax-section";
 import { AudioController } from "@/components/audio-controller";
 import { PodcastPlayer } from "@/components/podcast-player";
-import { GovernanceSim } from "@/components/governance-sim";
 import { PlaceHolderImages } from "@/lib/placeholder-images";
 import { Badge } from "@/components/ui/badge";
 import { useSound } from "@/hooks/use-sound";
@@ -30,20 +29,15 @@ import {
   ArrowRight,
   ShieldAlert,
   Zap,
-  ChevronRight
+  ChevronRight,
+  ExternalLink,
+  Headphones,
+  Maximize2
 } from "lucide-react";
-import {
-  Dialog,
-  DialogContent,
-  DialogTitle,
-} from "@/components/ui/dialog";
-import { cn } from "@/lib/utils";
 
 export default function Home() {
   const images = PlaceHolderImages;
   const { playSound } = useSound();
-  const [isHeaderWhite, setIsHeaderWhite] = React.useState(false);
-  const [isSimOpen, setIsSimOpen] = React.useState(false);
   const [activeSection, setActiveSection] = React.useState("intro");
 
   const podcastUrls = {
@@ -53,6 +47,7 @@ export default function Home() {
   };
 
   const videos = [
+    { id: "xaO9bsA8DtM", title: "Tensiones y tendencias de la Sostenibilidad", tag: "ESCUELA EXPERTOS" },
     { id: "WtAzaKmhOHs", title: "ABC de Innovación Social: Origen, Ética y Propósito", tag: "WEBINAR ESTRATÉGICO", start: 185 },
     { id: "A7fHwxBJ6Hs", title: "¿Qué pasa cuando no hay sostenibilidad?", tag: "CASO ESTRATÉGICO" },
     { id: "HIhWFFn3NDQ", title: "Sostenibilidad & Liderazgo", tag: "LA CONEXIÓN" },
@@ -60,8 +55,8 @@ export default function Home() {
   ];
 
   const clientLogos = [
+    { name: "Pacto Global Colombia", url: "https://picsum.photos/seed/pacto/200/100" },
     { name: "Metro de Medellín", url: "https://picsum.photos/seed/metro/200/100" },
-    { name: "Pacto Global", url: "https://picsum.photos/seed/pacto/200/100" },
     { name: "Comfenalco", url: "https://picsum.photos/seed/comfenalco/200/100" },
     { name: "Clínica Somer", url: "https://picsum.photos/seed/somer/200/100" },
     { name: "Alcaldía Medellín", url: "https://picsum.photos/seed/alcaldia/200/100" }
@@ -78,8 +73,6 @@ export default function Home() {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           setActiveSection(entry.target.id);
-          const darkSections = ['intro', 'gobierno', 'videos', 'simulador-banner'];
-          setIsHeaderWhite(darkSections.includes(entry.target.id));
         }
       });
     };
@@ -106,66 +99,116 @@ export default function Home() {
     }
   };
 
+  const handleOpenSim = () => {
+    playSound('click');
+    window.open('/simulador', '_blank');
+  };
+
+  const handleOpenLink = (url: string) => {
+    playSound('click');
+    window.open(url, '_blank');
+  };
+
   return (
     <main className="relative bg-background overflow-x-hidden font-body">
-      <TopNav onScrollTo={scrollTo} onOpenSim={() => setIsSimOpen(true)} />
+      <TopNav onScrollTo={scrollTo} />
       <Navigation activeSection={activeSection} />
       <AudioController />
       <DraftTool activeSection={activeSection} />
 
-      <Dialog open={isSimOpen} onOpenChange={setIsSimOpen}>
-        <DialogContent className="max-w-[95vw] lg:max-w-7xl p-0 border-none bg-transparent rounded-none shadow-none h-[92vh] overflow-hidden flex flex-col">
-          <DialogTitle className="sr-only">Simulador de Gobernanza IntegriCult GRC</DialogTitle>
-          <GovernanceSim />
-        </DialogContent>
-      </Dialog>
-
-      {/* MANIFIESTO DE COHERENCIA */}
-      <section id="intro" className="relative h-[85vh] lg:h-screen w-full flex items-center justify-center overflow-hidden">
+      {/* PORTADA HOME EDITORIAL */}
+      <section id="intro" className="relative h-screen w-full flex items-start justify-center overflow-hidden bg-primary pt-[20vh] lg:pt-[28vh]">
         <div className="absolute inset-0 z-0">
-          <ParallaxSection speed={-0.1} className="h-full w-full">
+          <ParallaxSection speed={-0.08} className="h-full w-full">
             <Image
               src={images.find(img => img.id === "intro-bg")?.imageUrl || ""}
               alt="IntegriCult Portada"
               fill
-              className="object-cover brightness-[0.4] saturate-[0.8] animate-ken-burns"
+              className="object-cover brightness-[0.35] saturate-[0.6] animate-ken-burns scale-110"
               priority
               data-ai-hint="abstract nebula"
             />
           </ParallaxSection>
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-primary/20" />
+          <div className="absolute inset-0 bg-gradient-to-b from-primary/30 via-transparent to-primary/60" />
         </div>
         
-        <div className="relative z-10 text-center space-y-4 lg:space-y-6 px-6">
-          <ScrollReveal className="space-y-4 lg:space-y-6">
-            <span className="text-secondary font-bold tracking-[0.6em] uppercase text-[9px] lg:text-[10px] block">
-              Manifiesto de Coherencia
-            </span>
-            <h2 className="text-fluid-hero font-headline text-white tracking-tighter m-0">
+        {/* METADATOS EDITORIALES LATERALES */}
+        <div className="absolute top-1/2 left-6 lg:left-12 -translate-y-1/2 z-20 hidden lg:flex flex-col gap-16 items-start opacity-40">
+           <div className="flex flex-col gap-2">
+              <span className="text-[8px] font-bold uppercase tracking-[0.5em] text-white">Concepto</span>
+              <span className="text-[10px] font-headline italic text-white/80">Individuación Corporativa</span>
+           </div>
+           <div className="flex flex-col gap-2">
+              <span className="text-[8px] font-bold uppercase tracking-[0.5em] text-white">Año</span>
+              <span className="text-[10px] font-headline italic text-white/80">Est. 2026</span>
+           </div>
+           <div className="w-[1px] h-24 bg-gradient-to-b from-white to-transparent opacity-30" />
+        </div>
+
+        <div className="absolute top-1/2 right-6 lg:right-12 -translate-y-1/2 z-20 hidden lg:flex flex-col gap-16 items-end opacity-40 text-right">
+           <div className="flex flex-col gap-2">
+              <span className="text-[8px] font-bold uppercase tracking-[0.5em] text-white">Localización</span>
+              <span className="text-[10px] font-headline italic text-white/80">Medellín, Colombia</span>
+           </div>
+           <div className="flex flex-col gap-2">
+              <span className="text-[8px] font-bold uppercase tracking-[0.5em] text-white">Gobernanza</span>
+              <span className="text-[10px] font-headline italic text-white/80">Integridad Técnica</span>
+           </div>
+           <div className="w-[1px] h-24 bg-gradient-to-t from-white to-transparent opacity-30" />
+        </div>
+
+        <div className="relative z-10 text-center space-y-8 lg:space-y-12 px-6 max-w-5xl">
+          <ScrollReveal className="space-y-6 lg:space-y-10">
+            <div className="flex flex-col items-center gap-4">
+              <span className="text-secondary font-bold tracking-[0.8em] uppercase text-[9px] lg:text-[11px] block animate-in fade-in slide-in-from-bottom-4 duration-1000">
+                Manifiesto de Coherencia
+              </span>
+              <div className="w-12 h-[1px] bg-secondary/30" />
+            </div>
+
+            <h1 className="text-fluid-hero font-headline text-white tracking-tighter m-0 leading-[0.85]">
               Integri<span className="italic text-secondary">Cult</span>
-            </h2>
-            <p className="text-base lg:text-3xl font-headline italic text-white/80 max-w-2xl mx-auto leading-tight">
-              "Donde el ser interno se encuentra con el deber ser colectivo"
-            </p>
+            </h1>
+
+            <div className="space-y-4">
+              <p className="text-lg lg:text-3xl font-headline italic text-white/90 max-w-2xl mx-auto leading-tight">
+                "Donde el ser interno se encuentra con el deber ser colectivo"
+              </p>
+              <div className="flex items-center justify-center gap-4 text-white/40 uppercase tracking-[0.4em] text-[8px] lg:text-[9px] font-bold">
+                 <span>Estrategia</span>
+                 <CircleDot className="w-2 h-2 text-secondary" />
+                 <span>Gobernanza</span>
+                 <CircleDot className="w-2 h-2 text-secondary" />
+                 <span>Ética</span>
+              </div>
+            </div>
           </ScrollReveal>
 
-          <ScrollReveal delay={400}>
-            <div className="flex flex-col items-center gap-4 lg:gap-6">
-              <div className="w-[1px] h-10 lg:h-16 bg-gradient-to-b from-secondary to-transparent" />
+          <ScrollReveal delay={500}>
+            <div className="flex flex-col items-center gap-6 lg:gap-10">
+              <div className="h-20 lg:h-32 w-[1px] bg-gradient-to-b from-secondary via-secondary/20 to-transparent" />
               <button 
                 onClick={() => scrollTo('corporativo')}
                 onMouseEnter={() => playSound('hover')}
-                className="group flex flex-col items-center gap-2 text-white/80 hover:text-secondary transition-all duration-700 pointer-events-auto"
+                className="group flex flex-col items-center gap-4 text-white hover:text-secondary transition-all duration-700 pointer-events-auto"
               >
-                <span className="text-[9px] lg:text-[10px] uppercase tracking-[0.6em] font-bold">Iniciar Viaje</span>
-                <ChevronDown className="w-4 h-4 animate-bounce" />
+                <div className="relative flex items-center justify-center w-12 h-12 lg:w-14 lg:h-14 border border-white/10 group-hover:border-secondary transition-colors duration-700">
+                   <ChevronDown className="w-4 h-4 lg:w-5 lg:h-5 animate-bounce" />
+                </div>
+                <span className="text-[9px] lg:text-[10px] uppercase tracking-[0.6em] font-bold opacity-60 group-hover:opacity-100 transition-opacity">Ingresar</span>
               </button>
             </div>
           </ScrollReveal>
         </div>
+
+        {/* NOMBRE DEL AUTOR EN LA BASE */}
+        <div className="absolute bottom-8 lg:bottom-12 left-0 right-0 z-20 flex flex-col items-center text-center opacity-60 pointer-events-none">
+           <span className="text-[9px] lg:text-[10px] font-bold text-white uppercase tracking-[0.5em] mb-1">John Darío Cardona Espinosa</span>
+           <span className="text-[7px] lg:text-[8px] text-white/50 uppercase tracking-[0.3em]">Estratega en Gobernanza, Ética & Sostenibilidad</span>
+        </div>
       </section>
 
-      {/* PUERTA CORPORATIVA */}
+      {/* SIGUIENTES SECCIONES IGUAL... */}
       <section id="corporativo" className="relative min-h-[60vh] flex items-center justify-center bg-[#EDEDEB] px-6 py-10 lg:py-14">
         <div className="max-w-7xl w-full grid lg:grid-cols-2 gap-10 lg:gap-20 items-center mx-auto">
           <ScrollReveal className="space-y-6 lg:space-y-8">
@@ -187,7 +230,7 @@ export default function Home() {
                 <ArrowRight className="ml-3 w-4 h-4 group-hover:translate-x-2 transition-transform" />
               </button>
               <button 
-                onClick={() => scrollTo('simulador-banner')}
+                onClick={handleOpenSim}
                 className="border border-primary/20 text-primary h-14 px-10 rounded-none text-[10px] uppercase tracking-[0.3em] font-bold hover:bg-white transition-all flex items-center justify-center bg-transparent"
               >
                 Diagnóstico GRC
@@ -251,7 +294,7 @@ export default function Home() {
               <p className="text-lg lg:text-xl text-primary font-headline italic">Diagnóstico cultural profundo y toma de decisiones éticas desde la raíz.</p>
             </div>
             <div className="w-full max-w-lg py-6 mx-auto">
-              <PodcastPlayer src={podcastUrls.p01} title="01 El círculo que vuelve a empezar" />
+              <PodcastPlayer podcastId="p01" src={podcastUrls.p01} title="01 El círculo que vuelve a empezar" />
             </div>
           </ScrollReveal>
         </div>
@@ -280,7 +323,7 @@ export default function Home() {
               <p className="text-lg lg:text-xl text-primary font-headline italic">Mentoría estratégica y comunicación de marca con propósito para directivos.</p>
             </div>
             <div className="max-w-lg">
-              <PodcastPlayer src={podcastUrls.p02} title="02 Recorrido experiencial" />
+              <PodcastPlayer podcastId="p02" src={podcastUrls.p02} title="02 Recorrido experiencial" />
             </div>
             <div className="bg-white/95 p-10 border border-secondary/5 space-y-6 shadow-lg">
               <div className="flex items-center gap-6">
@@ -328,6 +371,27 @@ export default function Home() {
             </ScrollReveal>
           ))}
         </div>
+
+        {/* MATERIAL DE APOYO: PACTO GLOBAL PODCAST */}
+        <ScrollReveal delay={400} className="w-full max-w-5xl px-6 mt-16 relative z-10 mx-auto">
+          <div className="bg-primary p-10 lg:p-14 border border-secondary/20 shadow-2xl flex flex-col md:flex-row items-center gap-10">
+            <div className="w-32 h-32 relative flex-shrink-0 border-2 border-secondary/30">
+              <Image src="https://picsum.photos/seed/pactoglobal/400/400" alt="Pacto Global" fill className="object-cover" />
+            </div>
+            <div className="space-y-6 flex-1">
+              <span className="text-secondary font-bold tracking-[0.4em] uppercase text-[9px] block">Podcast: Planeta Sostenible</span>
+              <h3 className="text-2xl lg:text-4xl font-headline text-white italic leading-tight">Mesa de Trabajo 2026: Una nueva mirada a la sostenibilidad ética.</h3>
+              <p className="text-white/60 font-headline italic text-lg leading-relaxed">Presentado por Pacto Global Colombia. John Darío Cardona analiza las tensiones del futuro corporativo.</p>
+              <button 
+                onClick={() => handleOpenLink("https://open.spotify.com/episode/6sh47qe32PsT15dyCsWBo9")}
+                className="flex items-center gap-4 text-white hover:text-secondary transition-colors group"
+              >
+                <Headphones className="w-6 h-6" />
+                <span className="text-[10px] font-bold uppercase tracking-[0.4em] border-b border-white/20 pb-1 group-hover:border-secondary transition-all">Escuchar en Spotify</span>
+              </button>
+            </div>
+          </div>
+        </ScrollReveal>
       </section>
 
       {/* CAPÍTULO IV: EL DEBER SER */}
@@ -388,7 +452,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* CAPÍTULO VI: GOBIERNO DE SÍ MISMO - DISEÑO EDITORIAL EXACTO */}
+      {/* CAPÍTULO VI: GOBIERNO DE SÍ MISMO */}
       <section id="gobierno" className="relative min-h-screen w-full flex flex-col items-center justify-start bg-primary overflow-hidden pt-12">
         <div className="absolute inset-0 z-0">
           <Image
@@ -402,7 +466,6 @@ export default function Home() {
           <div className="absolute inset-0 bg-gradient-to-b from-primary/70 via-primary/30 to-primary/80 z-10" />
         </div>
         
-        {/* Cabecera de Sección */}
         <div className="relative z-20 w-full flex justify-between px-6 lg:px-12 py-6">
           <span className="font-headline italic text-white/40 text-sm">IntegriCult</span>
           <div className="text-right">
@@ -431,28 +494,6 @@ export default function Home() {
             </div>
           </ScrollReveal>
 
-          {/* Reproductor Compacto Estilo Referencia */}
-          <ScrollReveal delay={200} className="w-full max-w-lg mt-12">
-            <div className="bg-black/20 backdrop-blur-md p-6 border-l-2 border-secondary/50 flex items-center gap-6">
-              <button 
-                onClick={() => playSound('click')}
-                className="w-12 h-12 bg-secondary flex items-center justify-center text-white"
-              >
-                <Play className="w-5 h-5 fill-current" />
-              </button>
-              <div className="flex-1 text-left">
-                <span className="block text-[9px] font-bold text-secondary uppercase tracking-[0.3em] mb-1">Podcast Editorial</span>
-                <div className="h-1 bg-white/10 w-full relative">
-                  <div className="absolute left-0 top-0 h-full w-1/3 bg-secondary" />
-                </div>
-                <div className="flex justify-between mt-2">
-                  <span className="text-[9px] font-bold text-white/40 tabular-nums">0:00 / 0:00</span>
-                </div>
-              </div>
-            </div>
-          </ScrollReveal>
-
-          {/* Bloque Narrativo Final */}
           <ScrollReveal delay={400} className="w-full max-w-3xl mt-12 lg:mt-20">
             <div className="bg-[#111111]/80 backdrop-blur-xl p-10 lg:p-14 border border-white/5 relative shadow-2xl text-left">
               <p className="text-lg lg:text-2xl font-headline italic text-white/80 leading-relaxed mb-10">
@@ -465,24 +506,21 @@ export default function Home() {
               </div>
             </div>
           </ScrollReveal>
-
-          {/* Mediateca Flotante */}
-          <div className="absolute right-0 top-1/2 -translate-y-1/2 hidden lg:flex flex-col items-center gap-4 px-12 opacity-40">
-            <span className="rotate-90 text-[10px] font-bold text-white tracking-[0.4em] uppercase whitespace-nowrap mb-8">Mediateca</span>
-            <ChevronRight className="w-6 h-6 text-secondary rotate-90" />
-          </div>
         </div>
       </section>
 
       {/* CAPÍTULO VII: SOSTENIBILIDAD EN ACCIÓN */}
-      <section id="sostenibilidad-accion" className="bg-[#EDEDEB] py-12 lg:py-16 px-6">
-        <div className="max-w-7xl mx-auto grid lg:grid-cols-[1.2fr_0.8fr] gap-12 lg:gap-24 items-center">
-          <ScrollReveal className="space-y-10 lg:space-y-14">
+      <section id="sostenibilidad-accion" className="bg-[#EDEDEB] py-16 lg:py-24 px-6">
+        <div className="max-w-7xl mx-auto grid lg:grid-cols-[1.2fr_0.8fr] gap-12 lg:gap-24 items-start">
+          <ScrollReveal className="space-y-12 lg:space-y-20">
             <div className="space-y-6">
               <span className="text-secondary font-bold tracking-[0.4em] uppercase text-[9px] block">Capítulo VII</span>
-              <h2 className="text-fluid-chapter font-headline text-primary tracking-tighter leading-none">Sostenibilidad <span className="italic text-secondary">en acción.</span></h2>
+              <h2 className="text-fluid-chapter font-headline text-primary tracking-tighter leading-[0.85] m-0">
+                Sostenibilidad <br /> 
+                <span className="italic text-secondary">en acción.</span>
+              </h2>
             </div>
-            <div className="space-y-6">
+            <div className="space-y-6 pl-6 lg:pl-16">
               {[
                 { title: "Diagnóstico de Cultura y Ética", icon: Target },
                 { title: "Sistemas ISO 37301 (Compliance)", icon: Shield },
@@ -496,8 +534,11 @@ export default function Home() {
               ))}
             </div>
           </ScrollReveal>
-          <ScrollReveal delay={300} className="bg-primary p-10 lg:p-14 text-white space-y-10 shadow-2xl">
-            <h3 className="text-3xl lg:text-4xl font-headline italic leading-tight">Portafolio Senior</h3>
+          <ScrollReveal delay={300} className="bg-primary p-10 lg:p-14 text-white space-y-10 shadow-2xl mt-12 lg:mt-32">
+            <div className="space-y-2">
+              <h3 className="text-3xl lg:text-4xl font-headline italic leading-tight">Portafolio Senior</h3>
+              <span className="text-secondary font-bold tracking-[0.3em] uppercase text-[8px] block opacity-60">Individuación</span>
+            </div>
             <p className="text-white/70 text-lg lg:text-xl font-headline italic leading-relaxed">Ciclo de Webinars: ABC de Innovación Social con Propósito Corporativo.</p>
             <button 
               onClick={() => document.getElementById('ai-trigger')?.click()}
@@ -509,7 +550,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* BANNER SIMULADOR ESTRATÉGICO - B/N CON TEXTOS EN COLOR */}
+      {/* BANNER SIMULADOR */}
       <section id="simulador-banner" className="relative h-[70vh] lg:h-[80vh] w-full bg-[#050505] overflow-hidden flex flex-col items-center justify-center border-y border-white/5 px-6 text-center">
         <div className="absolute inset-0 opacity-20 grayscale">
           <Image src="https://picsum.photos/seed/governance-data/1920/1080" alt="Data" fill className="object-cover" />
@@ -527,7 +568,7 @@ export default function Home() {
           </ScrollReveal>
           <ScrollReveal delay={200}>
             <button 
-              onClick={() => setIsSimOpen(true)}
+              onClick={handleOpenSim}
               className="bg-secondary text-white h-16 lg:h-20 px-12 lg:px-20 rounded-none text-[10px] lg:text-[11px] uppercase tracking-[0.4em] font-bold hover:bg-secondary/90 transition-all shadow-[0_0_40px_rgba(200,122,90,0.3)] flex items-center justify-center mx-auto group"
             >
               Iniciar Diagnóstico GRC <ShieldAlert className="ml-4 w-5 h-5 group-hover:scale-110 transition-transform" />
@@ -542,7 +583,7 @@ export default function Home() {
           <ScrollReveal className="text-center space-y-6">
             <h2 className="text-fluid-chapter font-headline text-white tracking-tighter leading-none">Casos y <span className="italic text-accent">Pensamiento</span></h2>
           </ScrollReveal>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {videos.map((video, i) => (
               <ScrollReveal key={video.id} delay={100 * i}>
                 <div onClick={() => window.open(`https://www.youtube.com/watch?v=${video.id}${video.start ? `&t=${video.start}` : ''}`, '_blank')} className="group relative aspect-video cursor-pointer overflow-hidden border border-white/5 bg-black/20 hover:border-accent/40 transition-all shadow-lg">
@@ -599,6 +640,12 @@ export default function Home() {
             <div className="text-[10px] font-bold tracking-[0.2em] uppercase text-primary/70 leading-relaxed">
               <p>John Darío Cardona Espinosa</p>
               <p>Estratega en Gobernanza & Ética Senior</p>
+              <button 
+                onClick={() => handleOpenLink("https://www.pactoglobal-colombia.org/conferencistas-congreso/john-dario-cardona-espinosa.html")}
+                className="mt-4 flex items-center gap-2 text-secondary hover:text-secondary/80 transition-all font-bold tracking-widest text-[8px] uppercase"
+              >
+                Conferencista Pacto Global <ExternalLink className="w-3 h-3" />
+              </button>
             </div>
           </div>
           <div className="space-y-8 text-center md:text-left">

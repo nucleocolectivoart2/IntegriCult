@@ -1,4 +1,3 @@
-
 "use client";
 
 import * as React from "react";
@@ -17,7 +16,6 @@ const navItems = [
   { id: "gobernanza", label: "Gobernanza", icon: Shield },
   { id: "gobierno", label: "Individuación", icon: User },
   { id: "sostenibilidad-accion", label: "Soluciones", icon: Briefcase },
-  { id: "simulador-banner", label: "Simulador GRC", icon: LayoutGrid },
   { id: "sello", label: "Sello", icon: Zap },
   { id: "videos", label: "Pensamiento", icon: Video },
   { id: "contacto-final", label: "Contacto", icon: MessageSquare },

@@ -22,7 +22,6 @@ export function DraftTool({ activeSection }: DraftToolProps) {
   const [result, setResult] = React.useState("");
   const { toast } = useToast();
 
-  // Mapeo de secciones del sitio a contextos de la IA
   React.useEffect(() => {
     if (activeSection) {
       const mapping: Record<string, string> = {
@@ -67,7 +66,7 @@ export function DraftTool({ activeSection }: DraftToolProps) {
 
   if (!isOpen) {
     return (
-      <div className="fixed bottom-16 lg:bottom-[64px] left-4 lg:left-8 z-[100] group">
+      <div className="fixed bottom-12 lg:bottom-[64px] left-4 lg:left-8 z-[100] group">
         <Button
           id="ai-trigger"
           onClick={() => setIsOpen(true)}

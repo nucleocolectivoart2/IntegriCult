@@ -1,3 +1,4 @@
+
 "use client";
 
 import * as React from "react";
@@ -7,10 +8,9 @@ import { ShieldCheck, MessageSquare, Briefcase, Play } from "lucide-react";
 
 interface TopNavProps {
   onScrollTo: (id: string) => void;
-  onOpenSim: () => void;
 }
 
-export function TopNav({ onScrollTo, onOpenSim }: TopNavProps) {
+export function TopNav({ onScrollTo }: TopNavProps) {
   const { playSound } = useSound();
   const [isScrolled, setIsScrolled] = React.useState(false);
 
@@ -67,26 +67,7 @@ export function TopNav({ onScrollTo, onOpenSim }: TopNavProps) {
               {link.label}
             </button>
           ))}
-          
-          <button
-            onClick={() => onScrollTo('simulador-banner')}
-            onMouseEnter={() => playSound('hover')}
-            className={cn(
-              "border px-4 py-1.5 text-[8px] font-bold uppercase tracking-widest transition-all hover:bg-secondary hover:text-white rounded-none",
-              isScrolled ? "border-primary/20 text-primary" : "border-white/20 text-white"
-            )}
-          >
-            Simulador
-          </button>
         </div>
-
-        {/* MOBILE SIM BUTTON */}
-        <button
-          onClick={() => onScrollTo('simulador-banner')}
-          className="lg:hidden bg-secondary text-white px-3 py-1.5 text-[8px] font-bold uppercase tracking-widest"
-        >
-          Simulador
-        </button>
       </div>
     </nav>
   );
